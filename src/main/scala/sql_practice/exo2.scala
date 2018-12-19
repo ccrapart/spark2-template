@@ -31,12 +31,14 @@ object exo2 {
 
     joinedDF
       .select($"description", $"2007_salary", $"2008_salary", (($"2008_salary" - $"2007_salary") / $"2007_salary" * 100).as("growth"))
+      .where($"growth" > 0)
       .orderBy($"growth".desc)
       .show(20)
 
 
     joinedDF
       .select($"description", $"2007_total_emp", $"2008_total_emp", (($"2008_total_emp" - $"2007_total_emp") / $"2007_total_emp" * 100).as("loss"))
+      .where($"loss" < 0)
       .orderBy($"loss".asc)
       .show(20)
   }
